@@ -1,0 +1,24 @@
+/* https://colorhunt.co/palette/fbf8f1f7ecdee9dac154bab9 */
+
+body {
+    background-color: #FBF8F1;
+}
+
+#footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #54BAB9;
+    color: white;
+    text-align: center;
+}
+
+.header {
+    background-color: #E9DAC1;
+}
+
+.thumbnail {
+    width: 10%;
+    height: 10%;
+}
