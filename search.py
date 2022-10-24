@@ -1,12 +1,15 @@
+from unicodedata import name
 from bs4 import BeautifulSoup
 import requests
 
-
-def search(search_parameters:dict):
-    headers = {
+headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36',
         'Accept-Language': 'en-US,en;q=0.9'
     }
+
+storage = {}
+
+async def search(search_parameters:dict):
     
     p = search_parameters
     
@@ -21,7 +24,7 @@ def search(search_parameters:dict):
 
     while True:
 
-        custom_link = f"{p['buy_or_rent']}/{p['search']}/{p['beds']}/{p['baths']}/{p['lot_or_not']}/{p['price']}/{p['sqft']}/{p['lot']}/{p['pend']}/pg-{page_number}"
+        custom_link = f"{p['buy_or_rent']}/{p['search']}/{p['beds']}/{p['baths']}{p['lot_or_not']}/{p['price']}{p['sqft']}/{p['lot']}/{p['pend']}/pg-{page_number}"
         search_link = f"https://www.realtor.com/{custom_link.replace('//','/')}"
 
         url = requests.get(url=search_link, headers=headers)
@@ -62,6 +65,8 @@ def search(search_parameters:dict):
                 try:
                     link = item.find('a')
                     dict_['link'] = f"https://www.realtor.com{link['href']}"
+                    a = dict_['link'].replace('https://www.realtor.com/','')
+                    dict_['address_url'] = a.replace('/','%') 
                 except:
                     pass
 
@@ -73,4 +78,31 @@ def search(search_parameters:dict):
         
         page_number += 1
 
+async def detailed_search(url:str):
+    search_link = f'https://www.realtor.com/{url}'
 
+    url = requests.get(url=search_link, headers=headers)
+    soup = BeautifulSoup(url.text, 'html.parser')
+
+    home_details = {}
+    
+
+    bed_bath_area = soup.find(class_="styles__StyledPropertyMeta-rui__sc-19am0y4-0 kRMSND")
+    b = []
+
+    for i in bed_bath_area:
+        for a in i:
+            b.append(a.getText())
+    
+    img_div = soup.find(name='div', class_="main-carousel")
+    for i in img_div:
+        img = i.find(name='img')
+        home_details['img'] = img['src']
+
+
+    home_details['price'] = soup.find(class_='Price__Component-rui__x3geed-0 gipzbd').getText()
+    home_details['address'] = soup.find(class_='Text__StyledText-rui__sc-19ei9fn-0 dEYYQ TypeBody__StyledBody-rui__sc-163o7f1-0 gVxVge').getText()
+    home_details['details'] = b
+    home_details['desc'] = soup.find(class_='jsx-355086517 desc').getText()
+    return home_details
+    

@@ -5,25 +5,30 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='static/style.css'>
-    <title>Document</title>
+    <title>Search Results</title>
 </head>
 <body>
-    <p>Results: {{ results[-1]['count'] }}</p>
-    {% for i in range(0,9) %}
-        <div class="container">
-            <a href="{{ results[i]['link'] }}" target="_blank" rel="noopener noreferrer">
-                <img src="{{ results[i]['img'] }}" alt="" class="thumbnail">
-            </a>
-            <p>Address: {{ results[i]['address'] }}</p>
-            <p>Price: {{ results[i]['price'] }}</p>
-            <p>{{ results[i]['details'][0] }} {{ results[i]['details'][1] }}</p>
-            <p>{{ results[i]['details'][2] }} {{ results[i]['details'][3] }}</p>
-            <p>{{ results[i]['details'][4] }} {{ results[i]['details'][5] }}</p>
-            <p>{{ results[i]['details'][6] }} {{ results[i]['details'][7] }}</p>
+    <div id='page-container'>
+        <div id="content-wrap">
+            <h3>Results from Realtor.com</h3>
+            <p>Results: {{ results[-1]['count'] }}</p>
+            <div class="home-view">
+            {% for i in range(0,(results[-1]['count'])) %}
+                <a href="{{ results[i]['link'] }}" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ results[i]['img'] }}" alt="" id="thumbnail">
+                </a>
+                <a href="{{ url_for('property',site_url=results[i]['address_url']) }}">Address: {{ results[i]['address'] }}</a>
+                <p>Price: {{ results[i]['price'] }}</p>
+                <p>{{ results[i]['details'][0] }} {{ results[i]['details'][1] }}</p>
+                <p>{{ results[i]['details'][2] }} {{ results[i]['details'][3] }}</p>
+                <p>{{ results[i]['details'][4] }} {{ results[i]['details'][5] }}</p>
+                <p>{{ results[i]['details'][6] }} {{ results[i]['details'][7] }}</p>
+            {%endfor%}
+            </div>
         </div>
-    {%endfor%}
-    <div id="footer">
-        <p>Made with ❤️ in Georgia</p>
+    </div>
+    <div>
+        
     </div>
 </body>
 </html>

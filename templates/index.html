@@ -5,83 +5,84 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='static/style.css'>
-    <title>Document</title>
+    <title>Rural Homes Finder</title>
 </head>
 <body>
-    <div id='header'>
-
-    </div>
-    <div class='container' id='search'>
-        <form action='{{ url_for('home') }}' method='post'>
-            <label for='search'>Address, City, State, or ZIP:</label>
-            <input type='text' id='search' name='search'><br><br>
-            <label for='buy-or-rent'>Buy or Rent?</label>
-            <select name='buy-or-rent' id='buy-or-rent'>
-                <option value='realestateandhomes-search' selected>Buy</option>
-                <option value='apartments'>Rent</option>
-            </select>
-            <label for='type'>Empty lot only?</label>
-            <input type='checkbox' id='type' name='type' value='type-land'>
-            <label for='price'>Max Price: </label>
-            <select name='price' id='price'>
-                <option value='' selected>No Max</option>
-                <option value='price-na-25000'>25k</option>
-                <option value='price-na-50000'>50k</option>
-                <option value='price-na-100000'>100k</option>
-                <option value='price-na-150000'>150k</option>
-                <option value='price-na-200000'>200k</option>
-                <option value='price-na-250000'>250k</option>
-                <option value='price-na-300000'>300k</option>
-                <option value='price-na-500000'>500k</option>
-                <option value='price-na-750000'>750k</option>
-                <option value='price-na-1000000'>1M</option>
-            </select>
-            <label for='beds'>Bedrooms: </label>
-            <select id='beds' name='beds'>
-                <option value='' selected>Any</option>
-                <option value='beds-1'>1+</option>
-                <option value='beds-2'>2+</option>
-                <option value='beds-3'>3+</option>
-                <option value='beds-4'>4+</option>
-                <option value='beds-5'>5+</option>
-            </select>
-            <label for='bath'>Bathrooms: </label>
-            <select id='bath' name='bath'>
-                <option value='' selected>Any</option>
-                <option value='baths-1'>1+</option>
-                <option value='baths-1.5'>1.5+</option>
-                <option value='baths-2'>2+</option>
-                <option value='baths-3'>3+</option>
-                <option value='baths-4'>4+</option>
-            </select>
-            <label for='home-size'>Minimum Home Size: </label>
-            <select id='sqft' name='sqft'>
-                <option value='' selected>Any</option>
-                <option value='sqft-500'>500+ Sqft</option>
-                <option value='sqft-1000'>1,000+ Sqft</option>
-                <option value='sqft-1500'>1,500+ Sqft</option>
-                <option value='sqft-2000'>2,000+ Sqft</option>
-                <option value='sqft-2500'>2,500+ Sqft</option>
-                <option value='sqft-3000'>3,000+ Sqft</option>
-                <option value='sqft-4000'>4,000+ Sqft</option>
-                <option value='sqft-5000'>5,000+ Sqft</option>
-            </select>
-            <label for='lot-size'>Minimum Lot Size: </label>
-            <select id='lot' name='lot'>
-                <option value='' selected>Any</option>
-                <option value='lot-sqft-43560'>1+ Acres</option>
-                <option value='lot-sqft-87120'>2+ Acres</option>
-                <option value='lot-sqft-130680'>3+ Acres</option>
-                <option value='lot-sqft-217800'>5+ Acres</option>
-                <option value='lot-sqft-435600'>10+ Acres</option>
-                <option value='lot-sqft-653400'>15+ Acres</option>
-                <option value='lot-sqft-1089000'>25+ Acres</option>
-                <option value='lot-sqft-2178000'>50+ Acres</option>
-            </select>
-            <label for='hide-pend'>Hide Pending / Contingient?</label>
-            <input type='checkbox' id='hide-pend' name='hide-pend' value='pnd-hide'>  
-            <input type='submit' value='Submit'>
-          </form> 
+    <div id='page-container'>
+        <div id="content-wrap">
+            <div class='container' id='search'>
+                <form action="{{ url_for('home') }}" method='post'>
+                    <label for='search'>Address, City, State, or ZIP:</label>
+                    <input type='text' id='search' name='search'><br><br>
+                    <label for='buy-or-rent'>Buy or Rent?</label>
+                    <select name='buy-or-rent' id='buy-or-rent'>
+                        <option value='realestateandhomes-search' selected>Buy</option>
+                        <option value='apartments'>Rent</option>
+                    </select>
+                    <label for='type'>Empty lot only?</label>
+                    <input type='checkbox' id='type' name='type' value='type-land'>
+                    <label for='price'>Max Price: </label>
+                    <select name='price' id='price'>
+                        <option value='' selected>No Max</option>
+                        <option value='price-na-25000'>25k</option>
+                        <option value='price-na-50000'>50k</option>
+                        <option value='price-na-100000'>100k</option>
+                        <option value='price-na-150000'>150k</option>
+                        <option value='price-na-200000'>200k</option>
+                        <option value='price-na-250000'>250k</option>
+                        <option value='price-na-300000'>300k</option>
+                        <option value='price-na-500000'>500k</option>
+                        <option value='price-na-750000'>750k</option>
+                        <option value='price-na-1000000'>1M</option>
+                    </select>
+                    <label for='beds'>Bedrooms: </label>
+                    <select id='beds' name='beds'>
+                        <option value='' selected>Any</option>
+                        <option value='beds-1'>1+</option>
+                        <option value='beds-2'>2+</option>
+                        <option value='beds-3'>3+</option>
+                        <option value='beds-4'>4+</option>
+                        <option value='beds-5'>5+</option>
+                    </select>
+                    <label for='bath'>Bathrooms: </label>
+                    <select id='bath' name='bath'>
+                        <option value='' selected>Any</option>
+                        <option value='baths-1'>1+</option>
+                        <option value='baths-1.5'>1.5+</option>
+                        <option value='baths-2'>2+</option>
+                        <option value='baths-3'>3+</option>
+                        <option value='baths-4'>4+</option>
+                    </select>
+                    <label for='home-size'>Minimum Home Size: </label>
+                    <select id='sqft' name='sqft'>
+                        <option value='' selected>Any</option>
+                        <option value='sqft-500'>500+ Sqft</option>
+                        <option value='sqft-1000'>1,000+ Sqft</option>
+                        <option value='sqft-1500'>1,500+ Sqft</option>
+                        <option value='sqft-2000'>2,000+ Sqft</option>
+                        <option value='sqft-2500'>2,500+ Sqft</option>
+                        <option value='sqft-3000'>3,000+ Sqft</option>
+                        <option value='sqft-4000'>4,000+ Sqft</option>
+                        <option value='sqft-5000'>5,000+ Sqft</option>
+                    </select>
+                    <label for='lot-size'>Minimum Lot Size: </label>
+                    <select id='lot' name='lot'>
+                        <option value='' selected>Any</option>
+                        <option value='lot-sqft-43560'>1+ Acres</option>
+                        <option value='lot-sqft-87120'>2+ Acres</option>
+                        <option value='lot-sqft-130680'>3+ Acres</option>
+                        <option value='lot-sqft-217800'>5+ Acres</option>
+                        <option value='lot-sqft-435600'>10+ Acres</option>
+                        <option value='lot-sqft-653400'>15+ Acres</option>
+                        <option value='lot-sqft-1089000'>25+ Acres</option>
+                        <option value='lot-sqft-2178000'>50+ Acres</option>
+                    </select>
+                    <label for='hide-pend'>Hide Pending / Contingient?</label>
+                    <input type='checkbox' id='hide-pend' name='hide-pend' value='pnd-hide'>  
+                    <input type='submit' value='Submit'>
+                  </form> 
+            </div>
+        </div>
     </div>
     <div id="footer">
         <p>Made with ❤️ in Georgia</p>

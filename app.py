@@ -1,13 +1,14 @@
 from flask import Flask, request, render_template
-from search import search
+from search import search, detailed_search, storage
 
 app = Flask(__name__)
-
-@app.route('/', methods =['GET', 'POST'])
-def home():
+@app.route('/')
+@app.route('/results', methods =['GET', 'POST'])
+async def home():
     if request.method == 'POST':
         # getting input with name = fname in HTML form
-        search_input = request.form.get('search')
+        s = request.form.get('search')
+        search_input = s.replace(' ','')
         buy_or_rent = request.form.get('buy-or-rent')
         lot_or_not = request.form.get('type')
         price = request.form.get('price')
@@ -18,7 +19,7 @@ def home():
         pend = request.form.get('hide-pend')
 
         search_parameters = {
-            'search': search_input,
+            'search': search_input.replace(',','_'),
             'buy_or_rent': buy_or_rent,
             'lot_or_not': lot_or_not,
             'price': price,
@@ -29,9 +30,16 @@ def home():
             'pend': pend
         }
         
-        return render_template('results.html', results=search(search_parameters))
+        return render_template('results.html', results=await search(search_parameters))
         
     return render_template('index.html')
+
+
+
+@app.route('/property/<string:site_url>', methods =['GET', 'POST'])
+async def property(site_url):
+
+    return render_template('property.html', details=await detailed_search(site_url.replace('%','/')))
 
 if __name__ == '__main__':
     app.run(debug=True)
