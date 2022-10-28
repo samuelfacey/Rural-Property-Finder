@@ -4,18 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/style.css">
+    <link rel='stylesheet' href='/static/style.css'>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <title>Property View</title>
 </head>
 <body>
     <div id="page-container">
         <div id="content-wrap">
-            <img src="{{ details['img'] }}" alt="">
-            <h3>{{ details['address'] }}</h3>
-            <h4>{{ details['price'] }}</h4>
-            <h5>{{ details['details'] }}</p>
-            <p>{{ details['desc'] }}</p>
+            <div class="container">
+                <a href="{{ details['link'] }}" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ details['img'] }}" alt="" id="thumbnail">
+                </a>
+                <h2>{{ details['address'] }}</h2>
+                <h3>{{ details['price'] }}</h3>
+                <h3>{{ details['details'][0] }} {{ details['details'][1] }}</h3>
+                <h3>{{ details['details'][2] }} {{ details['details'][3] }}</h3>
+                <h3>{{ details['details'][5] }}</h3>
+                <h3>{{ details['details'][7] }}</h3>
+                <p>{{ details['desc'] }}</p>
+                <a href="{{ details['risk_factor_link'] }}" target="_blank" rel="noopener noreferrer" class="button"><b>Enviromental Risk Factors</b></a>
+                <a href="{{ details['internet_link'] }}" target="_blank" rel="noopener noreferrer" class="button"><b>Local Internet Providers</b></a>
+            </div>
         </div>
     </div>
 </body>
+<footer>
+    <p style="color: white; height: auto;">Made with ❤️ by Samuel Facey 2022</p>
+</footer>
 </html>

@@ -1,12 +1,14 @@
 from flask import Flask, request, render_template
-from search import search, detailed_search, storage
+from search import search, detailed_search
 
 app = Flask(__name__)
 @app.route('/')
 @app.route('/results', methods =['GET', 'POST'])
 async def home():
+
+    # getting input from form
     if request.method == 'POST':
-        # getting input with name = fname in HTML form
+        
         s = request.form.get('search')
         search_input = s.replace(' ','')
         buy_or_rent = request.form.get('buy-or-rent')
@@ -15,30 +17,34 @@ async def home():
         beds = request.form.get('beds')
         baths = request.form.get('bath')
         sqft = request.form.get('sqft')
-        lot = request.form.get('lot') # need cap of 1000 acres to avoid false results
+        lot = request.form.get('lot')
         pend = request.form.get('hide-pend')
 
+        # Creating dictionary from form data
         search_parameters = {
-            'search': search_input.replace(',','_'),
-            'buy_or_rent': buy_or_rent,
-            'lot_or_not': lot_or_not,
-            'price': price,
-            'beds': beds,
-            'baths': baths,
-            'sqft': sqft,
-            'lot': lot,
-            'pend': pend
+            'search': '/' + str(search_input.replace(',','_')),
+            'buy_or_rent': '/' + str(buy_or_rent),
+            'lot_or_not': '/' + str(lot_or_not),
+            'price': '/' + str(price),
+            'beds': '/' + str(beds),
+            'baths': '/' + str(baths),
+            'sqft': '/' + str(sqft),
+            'lot': '/' + str(lot),
+            'pend': '/' + str(pend)
         }
         
+        # Serves reults page and calls search function to get results
         return render_template('results.html', results=await search(search_parameters))
-        
+    
+    # Serves index page
     return render_template('index.html')
 
 
-
+@app.route('/')
 @app.route('/property/<string:site_url>', methods =['GET', 'POST'])
 async def property(site_url):
 
+    # Serves property details page and calls detailed search function
     return render_template('property.html', details=await detailed_search(site_url.replace('%','/')))
 
 if __name__ == '__main__':

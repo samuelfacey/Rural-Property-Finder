@@ -1,4 +1,3 @@
-from unicodedata import name
 from bs4 import BeautifulSoup
 import requests
 
@@ -7,31 +6,27 @@ headers = {
         'Accept-Language': 'en-US,en;q=0.9'
     }
 
-storage = {}
-
 async def search(search_parameters:dict):
     
-    p = search_parameters
-    
-    if p['lot_or_not'] == None:
-        p['lot_or_not'] = ''
-    if p['pend'] == None:
-        p['pend'] = ''
 
+    p = search_parameters
+
+    # Creates list of properties
     property_info = []
     
     page_number = 1
 
     while True:
 
-        custom_link = f"{p['buy_or_rent']}/{p['search']}/{p['beds']}/{p['baths']}{p['lot_or_not']}/{p['price']}{p['sqft']}/{p['lot']}/{p['pend']}/pg-{page_number}"
-        search_link = f"https://www.realtor.com/{custom_link.replace('//','/')}"
-
+        # Beautiful Soup setup with form dictionary info
+        custom_link = f"{p['buy_or_rent']}{p['search']}{p['beds']}{p['baths']}{p['lot_or_not']}{p['price']}{p['sqft']}{p['lot']}{p['pend']}/pg-{page_number}"
+        search_link = f"https://www.realtor.com{custom_link.replace('/None','')}"
         url = requests.get(url=search_link, headers=headers)
 
         soup = BeautifulSoup(url.text, 'html.parser')
         cards = soup.find_all(class_='jsx-1881802087 component_property-card')
         
+        # Scrapes data from website property card
         if cards:
             print(page_number)
             for item in cards:
@@ -73,19 +68,22 @@ async def search(search_parameters:dict):
                 property_info.append(dict_)
 
         else:
+            
+            # Adds number of results and returns list of properties
             property_info.append({'count':len(property_info)})
             return property_info
         
         page_number += 1
 
 async def detailed_search(url:str):
+
+    # Beautiful soup setup
     search_link = f'https://www.realtor.com/{url}'
 
     url = requests.get(url=search_link, headers=headers)
     soup = BeautifulSoup(url.text, 'html.parser')
 
     home_details = {}
-    
 
     bed_bath_area = soup.find(class_="styles__StyledPropertyMeta-rui__sc-19am0y4-0 kRMSND")
     b = []
@@ -103,6 +101,15 @@ async def detailed_search(url:str):
     home_details['price'] = soup.find(class_='Price__Component-rui__x3geed-0 gipzbd').getText()
     home_details['address'] = soup.find(class_='Text__StyledText-rui__sc-19ei9fn-0 dEYYQ TypeBody__StyledBody-rui__sc-163o7f1-0 gVxVge').getText()
     home_details['details'] = b
-    home_details['desc'] = soup.find(class_='jsx-355086517 desc').getText()
+    try:
+        home_details['desc'] = soup.find(class_='jsx-355086517 desc').getText()
+    except:
+        home_details['desc'] = 'This property has no description.'
+    home_details['link'] = search_link
+    
+    address = home_details['address'].replace(' ','-')
+    address = address.replace(',','-')
+    home_details['risk_factor_link'] = f'https://riskfactor.com/'
+    home_details['internet_link'] = 'https://broadband477map.fcc.gov/#/'
     return home_details
     

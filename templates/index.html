@@ -5,15 +5,16 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='static/style.css'>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <title>Rural Homes Finder</title>
 </head>
 <body>
     <div id='page-container'>
         <div id="content-wrap">
             <div class='container' id='search'>
+                <h2 style="color: black; text-align: center;">Rural Realty</h2>
                 <form action="{{ url_for('home') }}" method='post'>
-                    <label for='search'>Address, City, State, or ZIP:</label>
-                    <input type='text' id='search' name='search'><br><br>
+                    <input type='text' id='search' name='search' placeholder="Address, City, State, or ZIP:"><br><br>
                     <label for='buy-or-rent'>Buy or Rent?</label>
                     <select name='buy-or-rent' id='buy-or-rent'>
                         <option value='realestateandhomes-search' selected>Buy</option>
@@ -23,7 +24,7 @@
                     <input type='checkbox' id='type' name='type' value='type-land'>
                     <label for='price'>Max Price: </label>
                     <select name='price' id='price'>
-                        <option value='' selected>No Max</option>
+                        <option value='None' selected>No Max</option>
                         <option value='price-na-25000'>25k</option>
                         <option value='price-na-50000'>50k</option>
                         <option value='price-na-100000'>100k</option>
@@ -37,7 +38,7 @@
                     </select>
                     <label for='beds'>Bedrooms: </label>
                     <select id='beds' name='beds'>
-                        <option value='' selected>Any</option>
+                        <option value='None' selected>Any</option>
                         <option value='beds-1'>1+</option>
                         <option value='beds-2'>2+</option>
                         <option value='beds-3'>3+</option>
@@ -46,7 +47,7 @@
                     </select>
                     <label for='bath'>Bathrooms: </label>
                     <select id='bath' name='bath'>
-                        <option value='' selected>Any</option>
+                        <option value='None' selected>Any</option>
                         <option value='baths-1'>1+</option>
                         <option value='baths-1.5'>1.5+</option>
                         <option value='baths-2'>2+</option>
@@ -55,7 +56,7 @@
                     </select>
                     <label for='home-size'>Minimum Home Size: </label>
                     <select id='sqft' name='sqft'>
-                        <option value='' selected>Any</option>
+                        <option value='None' selected>Any</option>
                         <option value='sqft-500'>500+ Sqft</option>
                         <option value='sqft-1000'>1,000+ Sqft</option>
                         <option value='sqft-1500'>1,500+ Sqft</option>
@@ -67,7 +68,7 @@
                     </select>
                     <label for='lot-size'>Minimum Lot Size: </label>
                     <select id='lot' name='lot'>
-                        <option value='' selected>Any</option>
+                        <option value='None' selected>Any</option>
                         <option value='lot-sqft-43560'>1+ Acres</option>
                         <option value='lot-sqft-87120'>2+ Acres</option>
                         <option value='lot-sqft-130680'>3+ Acres</option>
@@ -84,8 +85,8 @@
             </div>
         </div>
     </div>
-    <div id="footer">
-        <p>Made with ❤️ in Georgia</p>
-    </div>
 </body>
+<footer>
+    <p style="color: white; height: auto;">Made with ❤️ by Samuel Facey 2022</p>
+</footer>
 </html>

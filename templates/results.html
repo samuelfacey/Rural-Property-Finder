@@ -5,14 +5,15 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='static/style.css'>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <title>Search Results</title>
 </head>
 <body>
     <div id='page-container'>
         <div id="content-wrap">
+            <div class="container">
             <h3>Results from Realtor.com</h3>
             <p>Results: {{ results[-1]['count'] }}</p>
-            <div class="home-view">
             {% for i in range(0,(results[-1]['count'])) %}
                 <a href="{{ results[i]['link'] }}" target="_blank" rel="noopener noreferrer">
                     <img src="{{ results[i]['img'] }}" alt="" id="thumbnail">
@@ -24,11 +25,12 @@
                 <p>{{ results[i]['details'][4] }} {{ results[i]['details'][5] }}</p>
                 <p>{{ results[i]['details'][6] }} {{ results[i]['details'][7] }}</p>
             {%endfor%}
+            <br>
             </div>
         </div>
     </div>
-    <div>
-        
-    </div>
 </body>
+<footer>
+    <p style="color: white; height: auto;">Made with ❤️ by Samuel Facey 2022</p>
+</footer>
 </html>
