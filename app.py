@@ -11,7 +11,6 @@ async def home():
         
         s = request.form.get('search')
         search_input = s.replace(' ','')
-        buy_or_rent = request.form.get('buy-or-rent')
         lot_or_not = request.form.get('type')
         price = request.form.get('price')
         beds = request.form.get('beds')
@@ -23,7 +22,6 @@ async def home():
         # Creating dictionary from form data
         search_parameters = {
             'search': '/' + str(search_input.replace(',','_')),
-            'buy_or_rent': '/' + str(buy_or_rent),
             'lot_or_not': '/' + str(lot_or_not),
             'price': '/' + str(price),
             'beds': '/' + str(beds),

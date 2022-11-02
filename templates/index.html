@@ -15,15 +15,10 @@
                 <h2 style="color: black; text-align: center;">Rural Realty</h2>
                 <form action="{{ url_for('home') }}" method='post'>
                     <input type='text' id='search' name='search' placeholder="Address, City, State, or ZIP:"><br><br>
-                    <label for='buy-or-rent'>Buy or Rent?</label>
-                    <select name='buy-or-rent' id='buy-or-rent'>
-                        <option value='realestateandhomes-search' selected>Buy</option>
-                        <option value='apartments'>Rent</option>
-                    </select>
                     <label for='type'>Empty lot only?</label>
                     <input type='checkbox' id='type' name='type' value='type-land'>
                     <label for='price'>Max Price: </label>
-                    <select name='price' id='price'>
+                    <select name='buy-price' id='buy-price' style="visibility: visible">
                         <option value='None' selected>No Max</option>
                         <option value='price-na-25000'>25k</option>
                         <option value='price-na-50000'>50k</option>

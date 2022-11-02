@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-
+import time as t
 headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36',
         'Accept-Language': 'en-US,en;q=0.9'
@@ -19,10 +19,11 @@ async def search(search_parameters:dict):
     while True:
 
         # Beautiful Soup setup with form dictionary info
-        custom_link = f"{p['buy_or_rent']}{p['search']}{p['beds']}{p['baths']}{p['lot_or_not']}{p['price']}{p['sqft']}{p['lot']}{p['pend']}/pg-{page_number}"
+        custom_link = f"/realestateandhomes-search{p['search']}{p['beds']}{p['baths']}{p['lot_or_not']}{p['price']}{p['sqft']}{p['lot']}{p['pend']}/pg-{page_number}"
         search_link = f"https://www.realtor.com{custom_link.replace('/None','')}"
         url = requests.get(url=search_link, headers=headers)
 
+        print(search_link)
         soup = BeautifulSoup(url.text, 'html.parser')
         cards = soup.find_all(class_='jsx-1881802087 component_property-card')
         
@@ -30,7 +31,6 @@ async def search(search_parameters:dict):
         if cards:
             print(page_number)
             for item in cards:
-
                 dict_ = {}
 
                 try:
