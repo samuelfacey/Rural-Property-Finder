@@ -23,7 +23,6 @@ async def search(search_parameters:dict):
         search_link = f"https://www.realtor.com{custom_link.replace('/None','')}"
         url = requests.get(url=search_link, headers=headers)
 
-        print(search_link)
         soup = BeautifulSoup(url.text, 'html.parser')
         cards = soup.find_all(class_='jsx-1881802087 component_property-card')
         

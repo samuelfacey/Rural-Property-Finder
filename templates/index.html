@@ -6,13 +6,16 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='static/style.css'>
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
     <title>Rural Homes Finder</title>
 </head>
 <body>
     <div id='page-container'>
         <div id="content-wrap">
             <div class='container' id='search'>
-                <h2 style="color: black; text-align: center;">Rural Realty</h2>
+                <h2 style="color: black; text-align: center; padding: 10px;">Rural Realty</h2>
                 <form action="{{ url_for('home') }}" method='post'>
                     <input type='text' id='search' name='search' placeholder="Address, City, State, or ZIP:"><br><br>
                     <label for='type'>Empty lot only?</label>
