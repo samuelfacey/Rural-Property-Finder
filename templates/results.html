@@ -18,10 +18,10 @@
             <h3>Results from Realtor.com</h3>
             <p>Results: {{ results[-1]['count'] }}</p>
             {% for i in range(0,(results[-1]['count'])) %}
-                <a href="{{ results[i]['link'] }}" target="_blank" rel="noopener noreferrer">
+                <a href="{{ url_for('property',site_url=results[i]['address_url']) }}" target="_blank" rel="noopener noreferrer">
                     <img src="{{ results[i]['img'] }}" alt="" id="thumbnail">
                 </a>
-                <a href="{{ url_for('property',site_url=results[i]['address_url']) }}">Address: {{ results[i]['address'] }}</a>
+                <p>Address: {{ results[i]['address'] }}</p>
                 <p>Price: {{ results[i]['price'] }}</p>
                 <p>{{ results[i]['details'][0] }} {{ results[i]['details'][1] }}</p>
                 <p>{{ results[i]['details'][2] }} {{ results[i]['details'][3] }}</p>
