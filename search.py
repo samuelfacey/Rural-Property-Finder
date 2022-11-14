@@ -21,7 +21,6 @@ async def search(search_parameters:dict):
         # Beautiful Soup setup with form dictionary info
         custom_link = f"/realestateandhomes-search{p['search']}{p['beds']}{p['baths']}{p['lot_or_not']}{p['price']}{p['sqft']}{p['lot']}{p['pend']}/pg-{page_number}"
         search_link = f"https://www.realtor.com{custom_link.replace('/None','')}"
-        print(search_link)
         url = requests.get(url=search_link, headers=headers)
 
         soup = BeautifulSoup(url.text, 'html.parser')
@@ -29,7 +28,6 @@ async def search(search_parameters:dict):
         
         # Scrapes data from website property card
         if cards:
-            print(page_number)
             for item in cards:
                 dict_ = {}
 
@@ -79,7 +77,6 @@ async def detailed_search(url:str):
 
     # Beautiful soup setup
     search_link = f'https://www.realtor.com/{url}'
-    print(search_link)
 
     url = requests.get(url=search_link, headers=headers)
     soup = BeautifulSoup(url.text, 'html.parser')
