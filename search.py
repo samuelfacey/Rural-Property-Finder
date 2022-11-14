@@ -21,6 +21,7 @@ async def search(search_parameters:dict):
         # Beautiful Soup setup with form dictionary info
         custom_link = f"/realestateandhomes-search{p['search']}{p['beds']}{p['baths']}{p['lot_or_not']}{p['price']}{p['sqft']}{p['lot']}{p['pend']}/pg-{page_number}"
         search_link = f"https://www.realtor.com{custom_link.replace('/None','')}"
+        print(search_link)
         url = requests.get(url=search_link, headers=headers)
 
         soup = BeautifulSoup(url.text, 'html.parser')
@@ -78,13 +79,14 @@ async def detailed_search(url:str):
 
     # Beautiful soup setup
     search_link = f'https://www.realtor.com/{url}'
+    print(search_link)
 
     url = requests.get(url=search_link, headers=headers)
     soup = BeautifulSoup(url.text, 'html.parser')
 
     home_details = {}
 
-    bed_bath_area = soup.find(class_="styles__StyledPropertyMeta-rui__sc-19am0y4-0 kRMSND")
+    bed_bath_area = soup.find(class_="PropertyMetastyles__StyledPropertyMeta-rui__sc-1g5rdjn-0 dAKbvN")
     b = []
 
     for i in bed_bath_area:

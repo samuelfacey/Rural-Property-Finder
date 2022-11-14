@@ -12,7 +12,7 @@ async def home():
         s = request.form.get('search')
         search_input = s.replace(' ','')
         lot_or_not = request.form.get('type')
-        price = request.form.get('price')
+        price = request.form.get('buy-price')
         beds = request.form.get('beds')
         baths = request.form.get('bath')
         sqft = request.form.get('sqft')
